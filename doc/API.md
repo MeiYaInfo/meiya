@@ -303,16 +303,19 @@
 {
     type: String('ninepic' | 'petpic' | 'wildpic'),
     limit: Number,  // 需要显示的天数
-    time: Number   // 开始时间
+    time: Number   // 需要此时间之前的几天的数据
 }
 ```
 - 响应：
 ```
 {
     status: Number,
-    data: {
-        
-    },
+    data: [
+        {
+            pid: String,
+            addTime: String(UNIXstamp)
+        }
+    ],
     message: String
 }
 ```
