@@ -14,6 +14,7 @@
     type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情的广告
     file: file,
     startTime: UNIXtimestamp
+    endTime: UNIXtimestamp
 }
 ```
 - 响应：
@@ -46,6 +47,30 @@
         pid: String
     },
     message: String    
+}
+```
+
+### updateAd
+
+- 接口含义：更新广告
+- 请求方式：POST
+- 参数：
+```
+{
+    type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情的广告
+    file: file,
+    startTime: UNIXtimestamp
+    endTime: UNIXtimestamp
+}
+```
+- 响应：
+```
+{
+    status: Number(200 | 500)，   // 200表示成功，其他返回状态用别的状态码标识，并注明message
+    data: {
+        pid: String // 图片的id
+    },
+    message: String // 出错了则在这里注明出错信息，成功返回‘成功信息’
 }
 ```
 

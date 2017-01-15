@@ -1020,6 +1020,7 @@ body .markdown-body
 <li><a href="#_1">广告</a><ul>
 <li><a href="#addad">addAd</a></li>
 <li><a href="#getadd">getAdd</a></li>
+<li><a href="#updatead">updateAd</a></li>
 </ul>
 </li>
 <li><a href="#_2">用户</a><ul>
@@ -1047,6 +1048,7 @@ body .markdown-body
     type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情的广告
     file: file,
     startTime: UNIXtimestamp
+    endTime: UNIXtimestamp
 }
 </code></pre></li>
 <li>响应：<br />
@@ -1076,6 +1078,28 @@ body .markdown-body
         pid: String
     },
     message: String    
+}
+</code></pre></li>
+</ul>
+<h3 id="updatead"><a name="user-content-updatead" href="#updatead" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>updateAd</h3>
+<ul>
+<li>接口含义：更新广告</li>
+<li>请求方式：POST</li>
+<li>参数：<br />
+<pre><code>{
+    type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情的广告
+    file: file,
+    startTime: UNIXtimestamp
+    endTime: UNIXtimestamp
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number(200 | 500)，   // 200表示成功，其他返回状态用别的状态码标识，并注明message
+    data: {
+        pid: String // 图片的id
+    },
+    message: String // 出错了则在这里注明出错信息，成功返回‘成功信息’
 }
 </code></pre></li>
 </ul>
