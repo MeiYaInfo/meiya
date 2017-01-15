@@ -53,12 +53,12 @@
 
 ### addUser
 
-- 接口含义：添加用户
+- 接口含义：添加/修改用户
 - 请求方式：POST
 - 参数：
 ```
 {
-    uid: Number,
+    uid: Number,            // 注意：有这个参数的时候，为修改用户，没有的时候，为添加用户
     username: String,
     password: String,
     authority: Number,
@@ -89,9 +89,34 @@
 ```
 {
     status: Number,
-    data: {
-        
-    },
+    data: null,
+    message: String
+}
+```
+### queryUser
+
+- 接口含义：查询用户
+- 请求方式：GET
+- 参数：
+```
+{
+    limit: Number,
+    page: Number
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: [
+        {
+            uid: Number,
+            username: String,
+            authority: Number,
+            userLink: String,       // 点击头像跳转的地址，可以为空
+            userHeadIcon: String    // 头像的图片地址
+        }
+    ],
     message: String
 }
 ```
@@ -136,7 +161,7 @@
 }
 ```
 
-## 九图
+## 图片管理
 
 
 ## 野表情和萌宠

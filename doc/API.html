@@ -1025,11 +1025,12 @@ body .markdown-body
 <li><a href="#_2">用户</a><ul>
 <li><a href="#adduser">addUser</a></li>
 <li><a href="#deleteuser">deleteUser</a></li>
+<li><a href="#queryuser">queryUser</a></li>
 <li><a href="#login">login</a></li>
 <li><a href="#logout">logout</a></li>
 </ul>
 </li>
-<li><a href="#_3">九图</a></li>
+<li><a href="#_3">图片管理</a></li>
 <li><a href="#_4">野表情和萌宠</a></li>
 </ul>
 </li>
@@ -1081,11 +1082,11 @@ body .markdown-body
 <h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>用户</h2>
 <h3 id="adduser"><a name="user-content-adduser" href="#adduser" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>addUser</h3>
 <ul>
-<li>接口含义：添加用户</li>
+<li>接口含义：添加/修改用户</li>
 <li>请求方式：POST</li>
 <li>参数：<br />
 <pre><code>{
-    uid: Number,
+    uid: Number,            // 注意：有这个参数的时候，为修改用户，没有的时候，为添加用户
     username: String,
     password: String,
     authority: Number,
@@ -1113,9 +1114,33 @@ body .markdown-body
 <li>响应：<br />
 <pre><code>{
     status: Number,
-    data: {
-
-    },
+    data: null,
+    message: String
+}
+</code></pre></li>
+</ul>
+<h3 id="queryuser"><a name="user-content-queryuser" href="#queryuser" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>queryUser</h3>
+<ul>
+<li>接口含义：查询用户</li>
+<li>请求方式：GET</li>
+<li>参数：<br />
+<pre><code>{
+    limit: Number,
+    page: Number
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: [
+        {
+            uid: Number,
+            username: String,
+            authority: Number,
+            userLink: String,       // 点击头像跳转的地址，可以为空
+            userHeadIcon: String    // 头像的图片地址
+        }
+    ],
     message: String
 }
 </code></pre></li>
@@ -1157,5 +1182,5 @@ body .markdown-body
 }
 </code></pre></li>
 </ul>
-<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>九图</h2>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>图片管理</h2>
 <h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>野表情和萌宠</h2></article></body></html>
