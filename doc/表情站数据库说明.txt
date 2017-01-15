@@ -1,0 +1,57 @@
+用户｛
+	uid int 用户id(唯一,)
+	uname varchar(200) 用户名
+	authority int(2) 用户权限
+	uHeadIcon varchar(200) 头像
+｝
+
+图片{
+	pId int 图片id(唯一)
+	pUrl varchar(200) 图片地址
+	upLoadTime 上传时间
+}
+
+九宫格｛
+	nid int(10) 九宫格id（唯一）
+	pidList varchar(200) 图片id列表
+	desc varchar(200) 描述文字
+	original int(2) 原创
+	upLoaderId int 上传用户id
+	creatorId int 原创id
+	uploadTime timestamp 上传时间
+	favs int 点赞数量
+	visible int 是否可见
+｝
+
+点赞关键字{
+	id int 唯一id
+	word varchar(200) 文字
+	quality int 权值
+}
+
+野表情{
+	pid int 
+	visible int 可见与否
+	uploadTime timestamp 上传时间
+}
+
+萌宠{
+	pid int 
+	visible int 可见与否
+	uploadTime TIMESTAMP 上传时间
+}
+
+广告{
+	adId int 广告id
+	pid int 图片id
+	startTime TIMESTAMP 开始时间 
+	endTime TIMESTAMP 结束时间
+	adType int 广告类型
+}
+
+通用字段表{
+	cId int 唯一id
+	funcName varchar(40) 功能文字(服务器加一个广告位是否显示标记)
+	funcValue int 功能值
+}
+
