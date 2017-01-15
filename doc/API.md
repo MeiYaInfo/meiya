@@ -4,16 +4,18 @@
 
 ## 广告
 
-### addAd
+### editAd
 
-- 接口含义：添加广告
+- 接口含义：添加/修改广告
 - 请求方式：POST
 - 参数：
 ```
 {
+    adId: Number,   // 如果没有这个属性就是添加，有的话就是修改
     type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情的广告
-    file: file,
-    startTime: UNIXtimestamp
+    pid: String,    // 图片的id
+    startTime: Number(UNIXtimestamp),
+    endTime: Number(UNIXtimestamp)
 }
 ```
 - 响应：
@@ -51,7 +53,7 @@
 
 ## 用户
 
-### addUser
+### editUser
 
 - 接口含义：添加/修改用户
 - 请求方式：POST
@@ -93,15 +95,15 @@
     message: String
 }
 ```
-### queryUser
+### getUserList
 
-- 接口含义：查询用户
+- 接口含义：查询用户列表
 - 请求方式：GET
 - 参数：
 ```
 {
     limit: Number,
-    page: Number
+    page: Number,
 }
 ```
 - 响应：
@@ -117,6 +119,26 @@
             userHeadIcon: String    // 头像的图片地址
         }
     ],
+    message: String
+}
+```
+
+### getUser
+
+- 接口含义：查询当前登录用户信息
+- 请求方式：GET
+- 参数：无
+- 响应：
+```
+{
+    status: Number,
+    data: {
+        uid: Number,
+        username: String,
+        authority: Number,
+        userLink: String,       // 点击头像跳转的地址，可以为空
+        userHeadIcon: String    // 头像的图片地址
+    },
     message: String
 }
 ```
@@ -163,6 +185,98 @@
 
 ## 图片管理
 
+### uploadPic
 
-## 野表情和萌宠
+- 接口含义：添加图片
+- 请求方式：POST
+- 参数：
+```
+{
+    file: file
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: {
+        pid: String
+    },
+    message: String
+}
+```
+
+### editNinePic
+
+- 接口含义：添加九图文章
+- 请求方式：POST
+- 参数：
+```
+{
+    nid: Number,    // 有则是修改，没有就是添加
+    pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
+    uid: String, // 只能是user用户表中的用户uid
+    description: String,
+    original: Boolean,
+    addTime: Number(Unixstamp)
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: null,
+    message: String
+}
+```
+
+### getNinePicList
+
+- 接口含义：获取九图列表
+- 请求方式：GET
+- 参数：
+```
+{
+    limit: Number,  // 一次获取的九图数量
+    nid: Number     // 获取nid以后的九图
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: {
+        pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
+        uid: String, // 只能是user用户表中的用户uid
+        description: String,
+        original: Boolean
+    },
+    message: String
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
