@@ -1,10 +1,11 @@
 package routers
 
 import (
-	"meiya/server/controllers"
 	"github.com/astaxie/beego"
+	"meiya/server/controllers"
 )
 
 func init() {
-    beego.Router("/", &controllers.MainController{})
+	beego.Router("/", &controllers.MainController{})
+	beego.Router("/uploadPic", &controllers.UploadController{})
 }
