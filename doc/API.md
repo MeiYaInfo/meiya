@@ -236,7 +236,8 @@
     pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
     uid: String, // 只能是user用户表中的用户uid
     description: String,
-    original: Boolean
+    original: Boolean,
+    visble: Boolean
 }
 ```
 - 响应：
@@ -294,6 +295,27 @@
 }
 ```
 
+### editPic
+
+- 接口含义：新增/修改野表情/萌宠
+- 请求方式：post
+- 参数：
+```
+{
+    type: String('petpic' | 'wildpic'),
+    pid: String,
+    visible: Boolean
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: null,
+    message: String
+}
+```
+
 ### getPic
 
 查询野表情或萌宠表情
@@ -322,8 +344,47 @@
 }
 ```
 
+## 其他功能
 
+### fav
 
+- 接口含义：点赞
+- 请求方式：post
+- 参数：
+```
+{
+    nid: Number
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: null,
+    message: String
+}
+```
+
+### 
+
+- 接口含义：
+- 请求方式：
+- 参数：
+```
+{
+    
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: {
+        
+    },
+    message: String
+}
+```
 
 
 

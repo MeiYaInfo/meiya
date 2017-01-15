@@ -1037,7 +1037,13 @@ body .markdown-body
 <li><a href="#editninepic">editNinePic</a></li>
 <li><a href="#getninepic">getNinePic</a></li>
 <li><a href="#deleteninepic">deleteNinePic</a></li>
+<li><a href="#editpic">editPic</a></li>
 <li><a href="#getpic">getPic</a></li>
+</ul>
+</li>
+<li><a href="#_4">其他功能</a><ul>
+<li><a href="#fav">fav</a></li>
+<li><a href="#_5"></a></li>
 </ul>
 </li>
 </ul>
@@ -1259,7 +1265,8 @@ body .markdown-body
     pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
     uid: String, // 只能是user用户表中的用户uid
     description: String,
-    original: Boolean
+    original: Boolean,
+    visble: Boolean
 }
 </code></pre></li>
 <li>响应：<br />
@@ -1312,6 +1319,25 @@ body .markdown-body
 }
 </code></pre></li>
 </ul>
+<h3 id="editpic"><a name="user-content-editpic" href="#editpic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>editPic</h3>
+<ul>
+<li>接口含义：新增/修改野表情/萌宠</li>
+<li>请求方式：post</li>
+<li>参数：<br />
+<pre><code>{
+    type: String('petpic' | 'wildpic'),
+    pid: String,
+    visible: Boolean
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: null,
+    message: String
+}
+</code></pre></li>
+</ul>
 <h3 id="getpic"><a name="user-content-getpic" href="#getpic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getPic</h3>
 <p>查询野表情或萌宠表情</p>
 <ul>
@@ -1333,6 +1359,43 @@ body .markdown-body
             addTime: String(UNIXstamp)
         }
     ],
+    message: String
+}
+</code></pre></li>
+</ul>
+<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>其他功能</h2>
+<h3 id="fav"><a name="user-content-fav" href="#fav" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>fav</h3>
+<ul>
+<li>接口含义：点赞</li>
+<li>请求方式：post</li>
+<li>参数：<br />
+<pre><code>{
+    nid: Number
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: null,
+    message: String
+}
+</code></pre></li>
+</ul>
+<h3 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a></h3>
+<ul>
+<li>接口含义：</li>
+<li>请求方式：</li>
+<li>参数：<br />
+<pre><code>{
+
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: {
+
+    },
     message: String
 }
 </code></pre></li>
