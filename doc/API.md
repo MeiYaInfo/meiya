@@ -296,12 +296,14 @@
 
 ### getPic
 
+查询野表情或萌宠表情
+
 - 接口含义：查询野表情/萌宠信息
 - 请求方式：get
 - 参数：
 ```
 {
-    type: String('ninepic' | 'petpic' | 'wildpic'),
+    type: String('petpic' | 'wildpic'),
     limit: Number,  // 需要显示的天数
     time: Number   // 需要此时间之前的几天的数据
 }

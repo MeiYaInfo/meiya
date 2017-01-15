@@ -1313,12 +1313,13 @@ body .markdown-body
 </code></pre></li>
 </ul>
 <h3 id="getpic"><a name="user-content-getpic" href="#getpic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getPic</h3>
+<p>查询野表情或萌宠表情</p>
 <ul>
 <li>接口含义：查询野表情/萌宠信息</li>
 <li>请求方式：get</li>
 <li>参数：<br />
 <pre><code>{
-    type: String('ninepic' | 'petpic' | 'wildpic'),
+    type: String('petpic' | 'wildpic'),
     limit: Number,  // 需要显示的天数
     time: Number   // 需要此时间之前的几天的数据
 }
