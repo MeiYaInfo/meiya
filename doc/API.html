@@ -1018,37 +1018,45 @@ body .markdown-body
 <ul>
 <li><a href="#api">你丫才美工API</a><ul>
 <li><a href="#_1">广告</a><ul>
-<li><a href="#addad">addAd</a></li>
+<li><a href="#editad">editAd</a></li>
 <li><a href="#getadd">getAdd</a></li>
-<li><a href="#updatead">updateAd</a></li>
+<li><a href="#deletead">deleteAd</a></li>
 </ul>
 </li>
 <li><a href="#_2">用户</a><ul>
-<li><a href="#adduser">addUser</a></li>
+<li><a href="#edituser">editUser</a></li>
 <li><a href="#deleteuser">deleteUser</a></li>
-<li><a href="#queryuser">queryUser</a></li>
+<li><a href="#getuser">getUser</a></li>
+<li><a href="#getlogininfo">getLoginInfo</a></li>
 <li><a href="#login">login</a></li>
 <li><a href="#logout">logout</a></li>
 </ul>
 </li>
-<li><a href="#_3">图片管理</a></li>
-<li><a href="#_4">野表情和萌宠</a></li>
+<li><a href="#_3">图片管理</a><ul>
+<li><a href="#uploadpic">uploadPic</a></li>
+<li><a href="#editninepic">editNinePic</a></li>
+<li><a href="#getninepic">getNinePic</a></li>
+<li><a href="#deleteninepic">deleteNinePic</a></li>
+<li><a href="#getpic">getPic</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 <h1 id="api"><a name="user-content-api" href="#api" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>你丫才美工API</h1>
 <h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>广告</h2>
-<h3 id="addad"><a name="user-content-addad" href="#addad" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>addAd</h3>
+<h3 id="editad"><a name="user-content-editad" href="#editad" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>editAd</h3>
 <ul>
-<li>接口含义：添加广告</li>
+<li>接口含义：添加/修改广告</li>
 <li>请求方式：POST</li>
 <li>参数：<br />
 <pre><code>{
-    type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情的广告
-    file: file,
-    startTime: UNIXtimestamp
-    endTime: UNIXtimestamp
+    adId: Number,   // 如果没有这个属性就是添加，有的话就是修改
+    type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情
+    pid: String,    // 图片的id
+    startTime: Number(UNIXtimestamp),
+    endTime: Number(UNIXtimestamp)
 }
 </code></pre></li>
 <li>响应：<br />
@@ -1067,44 +1075,39 @@ body .markdown-body
 <li>请求方式：GET</li>
 <li>参数：<br />
 <pre><code>{
-    type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情的广告
+    type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情
 }
 </code></pre></li>
 <li>响应：<br />
 <pre><code>{
     status: Number,
     data: {
-        type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情的广告
+        type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情
         pid: String
     },
     message: String    
 }
 </code></pre></li>
 </ul>
-<h3 id="updatead"><a name="user-content-updatead" href="#updatead" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>updateAd</h3>
+<h3 id="deletead"><a name="user-content-deletead" href="#deletead" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>deleteAd</h3>
 <ul>
-<li>接口含义：更新广告</li>
+<li>接口含义：删除广告</li>
 <li>请求方式：POST</li>
 <li>参数：<br />
 <pre><code>{
-    type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情的广告
-    file: file,
-    startTime: UNIXtimestamp
-    endTime: UNIXtimestamp
+    adId: number
 }
 </code></pre></li>
 <li>响应：<br />
 <pre><code>{
-    status: Number(200 | 500)，   // 200表示成功，其他返回状态用别的状态码标识，并注明message
-    data: {
-        pid: String // 图片的id
-    },
-    message: String // 出错了则在这里注明出错信息，成功返回‘成功信息’
+    status: Number,
+    data: null,
+    message: String
 }
 </code></pre></li>
 </ul>
 <h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>用户</h2>
-<h3 id="adduser"><a name="user-content-adduser" href="#adduser" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>addUser</h3>
+<h3 id="edituser"><a name="user-content-edituser" href="#edituser" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>editUser</h3>
 <ul>
 <li>接口含义：添加/修改用户</li>
 <li>请求方式：POST</li>
@@ -1143,14 +1146,15 @@ body .markdown-body
 }
 </code></pre></li>
 </ul>
-<h3 id="queryuser"><a name="user-content-queryuser" href="#queryuser" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>queryUser</h3>
+<h3 id="getuser"><a name="user-content-getuser" href="#getuser" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getUser</h3>
 <ul>
-<li>接口含义：查询用户</li>
+<li>接口含义：查询用户列表</li>
 <li>请求方式：GET</li>
 <li>参数：<br />
 <pre><code>{
+    uid: Number,    // 有这个字段就只返回该用户信息，没有则接收liimt和page字段返回用户列表
     limit: Number,
-    page: Number
+    page: Number,
 }
 </code></pre></li>
 <li>响应：<br />
@@ -1165,6 +1169,25 @@ body .markdown-body
             userHeadIcon: String    // 头像的图片地址
         }
     ],
+    message: String
+}
+</code></pre></li>
+</ul>
+<h3 id="getlogininfo"><a name="user-content-getlogininfo" href="#getlogininfo" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getLoginInfo</h3>
+<ul>
+<li>接口含义：查询当前登录用户信息</li>
+<li>请求方式：GET</li>
+<li>参数：无</li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: {
+        uid: Number,
+        username: String,
+        authority: Number,
+        userLink: String,       // 点击头像跳转的地址，可以为空
+        userHeadIcon: String    // 头像的图片地址
+    },
     message: String
 }
 </code></pre></li>
@@ -1207,4 +1230,110 @@ body .markdown-body
 </code></pre></li>
 </ul>
 <h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>图片管理</h2>
-<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>野表情和萌宠</h2></article></body></html>
+<h3 id="uploadpic"><a name="user-content-uploadpic" href="#uploadpic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>uploadPic</h3>
+<ul>
+<li>接口含义：添加图片</li>
+<li>请求方式：POST</li>
+<li>参数：<br />
+<pre><code>{
+    file: file
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: {
+        pid: String
+    },
+    message: String
+}
+</code></pre></li>
+</ul>
+<h3 id="editninepic"><a name="user-content-editninepic" href="#editninepic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>editNinePic</h3>
+<ul>
+<li>接口含义：添加九图文章</li>
+<li>请求方式：POST</li>
+<li>参数：<br />
+<pre><code>{
+    nid: Number,    // 有则是修改，没有就是添加
+    pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
+    uid: String, // 只能是user用户表中的用户uid
+    description: String,
+    original: Boolean
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: null,
+    message: String
+}
+</code></pre></li>
+</ul>
+<h3 id="getninepic"><a name="user-content-getninepic" href="#getninepic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getNinePic</h3>
+<ul>
+<li>接口含义：获取九图</li>
+<li>请求方式：GET</li>
+<li>参数：<br />
+<pre><code>{
+    limit: Number,  // 有这个属性就是获取nid之前的limit个列表，没有这个属性就是获取nid这条九图的信息 
+    nid: Number
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: [
+        {
+            pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
+            uid: String, // 只能是user用户表中的用户uid
+            description: String,
+            original: Boolean
+        }
+    ]
+    message: String
+}
+</code></pre></li>
+</ul>
+<h3 id="deleteninepic"><a name="user-content-deleteninepic" href="#deleteninepic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>deleteNinePic</h3>
+<ul>
+<li>接口含义：删除九图</li>
+<li>请求方式：post</li>
+<li>参数：<br />
+<pre><code>{
+    nid: Number
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: null,
+    message: String
+}
+</code></pre></li>
+</ul>
+<h3 id="getpic"><a name="user-content-getpic" href="#getpic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getPic</h3>
+<p>查询野表情或萌宠表情</p>
+<ul>
+<li>接口含义：查询野表情/萌宠信息</li>
+<li>请求方式：get</li>
+<li>参数：<br />
+<pre><code>{
+    type: String('petpic' | 'wildpic'),
+    limit: Number,  // 需要显示的天数
+    time: Number   // 需要此时间之前的几天的数据
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: [
+        {
+            pid: String,
+            addTime: String(UNIXstamp)
+        }
+    ],
+    message: String
+}
+</code></pre></li>
+</ul></article></body></html>
