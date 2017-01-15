@@ -50,6 +50,24 @@
     message: String    
 }
 ```
+### deleteAd
+
+- 接口含义：删除广告
+- 请求方式：POST
+- 参数：
+```
+{
+    adId: number
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: null,
+    message: String
+}
+```
 
 ## 用户
 
@@ -95,13 +113,14 @@
     message: String
 }
 ```
-### getUserList
+### getUser
 
 - 接口含义：查询用户列表
 - 请求方式：GET
 - 参数：
 ```
 {
+    uid: Number,    // 有这个字段就只返回该用户信息，没有则接收liimt和page字段返回用户列表
     limit: Number,
     page: Number,
 }
@@ -123,7 +142,7 @@
 }
 ```
 
-### getUser
+### getLoginInfo
 
 - 接口含义：查询当前登录用户信息
 - 请求方式：GET

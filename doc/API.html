@@ -1020,13 +1020,14 @@ body .markdown-body
 <li><a href="#_1">广告</a><ul>
 <li><a href="#editad">editAd</a></li>
 <li><a href="#getadd">getAdd</a></li>
+<li><a href="#deletead">deleteAd</a></li>
 </ul>
 </li>
 <li><a href="#_2">用户</a><ul>
 <li><a href="#edituser">editUser</a></li>
 <li><a href="#deleteuser">deleteUser</a></li>
-<li><a href="#getuserlist">getUserList</a></li>
 <li><a href="#getuser">getUser</a></li>
+<li><a href="#getlogininfo">getLoginInfo</a></li>
 <li><a href="#login">login</a></li>
 <li><a href="#logout">logout</a></li>
 </ul>
@@ -1086,6 +1087,23 @@ body .markdown-body
 }
 </code></pre></li>
 </ul>
+<h3 id="deletead"><a name="user-content-deletead" href="#deletead" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>deleteAd</h3>
+<ul>
+<li>接口含义：删除广告</li>
+<li>请求方式：POST</li>
+<li>参数：<br />
+<pre><code>{
+    adId: number
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: null,
+    message: String
+}
+</code></pre></li>
+</ul>
 <h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>用户</h2>
 <h3 id="edituser"><a name="user-content-edituser" href="#edituser" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>editUser</h3>
 <ul>
@@ -1126,12 +1144,13 @@ body .markdown-body
 }
 </code></pre></li>
 </ul>
-<h3 id="getuserlist"><a name="user-content-getuserlist" href="#getuserlist" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getUserList</h3>
+<h3 id="getuser"><a name="user-content-getuser" href="#getuser" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getUser</h3>
 <ul>
 <li>接口含义：查询用户列表</li>
 <li>请求方式：GET</li>
 <li>参数：<br />
 <pre><code>{
+    uid: Number,    // 有这个字段就只返回该用户信息，没有则接收liimt和page字段返回用户列表
     limit: Number,
     page: Number,
 }
@@ -1152,7 +1171,7 @@ body .markdown-body
 }
 </code></pre></li>
 </ul>
-<h3 id="getuser"><a name="user-content-getuser" href="#getuser" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getUser</h3>
+<h3 id="getlogininfo"><a name="user-content-getlogininfo" href="#getlogininfo" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getLoginInfo</h3>
 <ul>
 <li>接口含义：查询当前登录用户信息</li>
 <li>请求方式：GET</li>
