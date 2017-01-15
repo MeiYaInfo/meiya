@@ -1035,7 +1035,9 @@ body .markdown-body
 <li><a href="#_3">图片管理</a><ul>
 <li><a href="#uploadpic">uploadPic</a></li>
 <li><a href="#editninepic">editNinePic</a></li>
-<li><a href="#getninepiclist">getNinePicList</a></li>
+<li><a href="#getninepic">getNinePic</a></li>
+<li><a href="#deleteninepic">deleteNinePic</a></li>
+<li><a href="#getpic">getPic</a></li>
 </ul>
 </li>
 </ul>
@@ -1051,7 +1053,7 @@ body .markdown-body
 <li>参数：<br />
 <pre><code>{
     adId: Number,   // 如果没有这个属性就是添加，有的话就是修改
-    type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情的广告
+    type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情
     pid: String,    // 图片的id
     startTime: Number(UNIXtimestamp),
     endTime: Number(UNIXtimestamp)
@@ -1073,14 +1075,14 @@ body .markdown-body
 <li>请求方式：GET</li>
 <li>参数：<br />
 <pre><code>{
-    type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情的广告
+    type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情
 }
 </code></pre></li>
 <li>响应：<br />
 <pre><code>{
     status: Number,
     data: {
-        type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情的广告
+        type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情
         pid: String
     },
     message: String    
@@ -1257,8 +1259,7 @@ body .markdown-body
     pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
     uid: String, // 只能是user用户表中的用户uid
     description: String,
-    original: Boolean,
-    addTime: Number(Unixstamp)
+    original: Boolean
 }
 </code></pre></li>
 <li>响应：<br />
@@ -1269,24 +1270,64 @@ body .markdown-body
 }
 </code></pre></li>
 </ul>
-<h3 id="getninepiclist"><a name="user-content-getninepiclist" href="#getninepiclist" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getNinePicList</h3>
+<h3 id="getninepic"><a name="user-content-getninepic" href="#getninepic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getNinePic</h3>
 <ul>
-<li>接口含义：获取九图列表</li>
+<li>接口含义：获取九图</li>
 <li>请求方式：GET</li>
 <li>参数：<br />
 <pre><code>{
-    limit: Number,  // 一次获取的九图数量
-    nid: Number     // 获取nid以后的九图
+    limit: Number,  // 有这个属性就是获取nid之前的limit个列表，没有这个属性就是获取nid这条九图的信息 
+    nid: Number
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: [
+        {
+            pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
+            uid: String, // 只能是user用户表中的用户uid
+            description: String,
+            original: Boolean
+        }
+    ]
+    message: String
+}
+</code></pre></li>
+</ul>
+<h3 id="deleteninepic"><a name="user-content-deleteninepic" href="#deleteninepic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>deleteNinePic</h3>
+<ul>
+<li>接口含义：删除九图</li>
+<li>请求方式：post</li>
+<li>参数：<br />
+<pre><code>{
+    nid: Number
+}
+</code></pre></li>
+<li>响应：<br />
+<pre><code>{
+    status: Number,
+    data: null,
+    message: String
+}
+</code></pre></li>
+</ul>
+<h3 id="getpic"><a name="user-content-getpic" href="#getpic" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>getPic</h3>
+<ul>
+<li>接口含义：查询野表情/萌宠信息</li>
+<li>请求方式：get</li>
+<li>参数：<br />
+<pre><code>{
+    type: String('ninepic' | 'petpic' | 'wildpic'),
+    limit: Number,  // 需要显示的天数
+    time: Number   // 开始时间
 }
 </code></pre></li>
 <li>响应：<br />
 <pre><code>{
     status: Number,
     data: {
-        pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
-        uid: String, // 只能是user用户表中的用户uid
-        description: String,
-        original: Boolean
+
     },
     message: String
 }

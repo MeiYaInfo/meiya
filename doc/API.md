@@ -12,7 +12,7 @@
 ```
 {
     adId: Number,   // 如果没有这个属性就是添加，有的话就是修改
-    type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情的广告
+    type: 'ninepic' | 'petpic' | 'wildpic', //分别对应九图，萌宠搞事，野表情
     pid: String,    // 图片的id
     startTime: Number(UNIXtimestamp),
     endTime: Number(UNIXtimestamp)
@@ -36,7 +36,7 @@
 - 参数：
 ```
 {
-    type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情的广告
+    type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情
 }
 ```
 - 响应：
@@ -44,7 +44,7 @@
 {
     status: Number,
     data: {
-        type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情的广告
+        type: String('ninepic' | 'petpic' | 'wildpic'), //分别对应九图，萌宠搞事，野表情
         pid: String
     },
     message: String    
@@ -236,8 +236,7 @@
     pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
     uid: String, // 只能是user用户表中的用户uid
     description: String,
-    original: Boolean,
-    addTime: Number(Unixstamp)
+    original: Boolean
 }
 ```
 - 响应：
@@ -249,15 +248,62 @@
 }
 ```
 
-### getNinePicList
+### getNinePic
 
-- 接口含义：获取九图列表
+- 接口含义：获取九图
 - 请求方式：GET
 - 参数：
 ```
 {
-    limit: Number,  // 一次获取的九图数量
-    nid: Number     // 获取nid以后的九图
+    limit: Number,  // 有这个属性就是获取nid之前的limit个列表，没有这个属性就是获取nid这条九图的信息 
+    nid: Number
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: [
+        {
+            pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
+            uid: String, // 只能是user用户表中的用户uid
+            description: String,
+            original: Boolean
+        }
+    ]
+    message: String
+}
+```
+
+### deleteNinePic
+
+- 接口含义：删除九图
+- 请求方式：post
+- 参数：
+```
+{
+    nid: Number
+}
+```
+- 响应：
+```
+{
+    status: Number,
+    data: null,
+    message: String
+}
+```
+
+### getPic
+
+- 接口含义：查询野表情/萌宠信息
+- 请求方式：get
+- 参数：
+```
+{
+    type: String('ninepic' | 'petpic' | 'wildpic'),
+    limit: Number,  // 需要显示的天数
+    time: Number   // 开始时间
 }
 ```
 - 响应：
@@ -265,16 +311,11 @@
 {
     status: Number,
     data: {
-        pids: String,   // 由多个图片的pid拼接而成的字符串，用逗号分开
-        uid: String, // 只能是user用户表中的用户uid
-        description: String,
-        original: Boolean
+        
     },
     message: String
 }
 ```
-
-
 
 
 
